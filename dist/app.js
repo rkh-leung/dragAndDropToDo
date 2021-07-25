@@ -35,7 +35,8 @@ function autobind(_1, _2, descriptor) {
     const adjDescriptor = {
         configurable: true,
         get() {
-            return originalMethod.bind(this);
+            const boundFn = originalMethod.bind(this);
+            return boundFn;
         },
     };
     return adjDescriptor;
@@ -76,8 +77,8 @@ class ProjectInput {
     }
     gatherUserInput() {
         const enteredTitle = this.titleInputElement.value;
-        const enteredDescription = this.titleInputElement.value;
-        const enteredPeople = this.titleInputElement.value;
+        const enteredDescription = this.descriptionInputElement.value;
+        const enteredPeople = this.peopleInputElement.value;
         const titleValidatable = {
             value: enteredTitle,
             required: true,
