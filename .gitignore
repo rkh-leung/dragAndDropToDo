@@ -1,2 +1,8 @@
 .idea/
 node_modules/
+.vscode/
+dist/
+
+#Exclude tsc generated files
+js/*.map
+js/ts.js
