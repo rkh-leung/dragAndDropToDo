@@ -1,4 +1,5 @@
 class ProjectState {
+  private listeners: any[] = [];
   private projects: any[] = [];
   private static instance: ProjectState;
 
@@ -10,6 +11,10 @@ class ProjectState {
     return this.instance;
   }
 
+  addListeners(listenerFn: Function) {
+    this.listeners.push(listenerFn);
+  }
+
   addProject(title: string, description: string, numOfPeople: number) {
     const newProject = {
       id: Math.random.toString(),
@@ -17,7 +22,11 @@ class ProjectState {
       description,
       people: numOfPeople,
     };
+
     this.projects.push(newProject);
+    for (const listenerFn of this.listeners) {
+      listenerFn(this.projects.slice()); // pass a new reference to prevent unwanted side effects
+    }
   }
 }
 
