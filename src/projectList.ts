@@ -4,13 +4,14 @@ class ProjectList {
   templateElement: HTMLTemplateElement;
   hostElement: HTMLDivElement;
   element: HTMLElement;
-  assignedProjects: any[] | undefined;
+  assignedProjects: any[]
 
   constructor(private type: "active" | "finished") {
     this.templateElement = document.getElementById(
       "project-list"
     )! as HTMLTemplateElement;
     this.hostElement = document.getElementById("app")! as HTMLDivElement;
+    this.assignedProjects = []
 
     const importNode = document.importNode(this.templateElement.content, true);
     this.element = importNode.firstElementChild as HTMLElement;
@@ -18,11 +19,20 @@ class ProjectList {
 
     projectState.addListeners((projects: any[]) => {
       this.assignedProjects = projects;
-      this.renderProjects()
+      this.renderProjects();
     });
 
     this.attach();
     this.renderContent();
+  }
+
+  private renderProjects() {
+    const listEl = document.getElementById(`${this.type}-projects-list`)! as HTMLUListElement
+    for (const projectItem of this.assignedProjects) {
+      const listItem = document.createElement('li')
+      listItem.textContent = projectItem.title
+      listEl.appendChild(listItem)
+    }
   }
 
   private renderContent() {
