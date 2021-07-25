@@ -1,7 +1,10 @@
+import { projectState } from "./projectState";
+
 class ProjectList {
   templateElement: HTMLTemplateElement;
   hostElement: HTMLDivElement;
   element: HTMLElement;
+  assignedProjects: any[] | undefined;
 
   constructor(private type: "active" | "finished") {
     this.templateElement = document.getElementById(
@@ -12,6 +15,12 @@ class ProjectList {
     const importNode = document.importNode(this.templateElement.content, true);
     this.element = importNode.firstElementChild as HTMLElement;
     this.element.id = `${this.type}-projects`;
+
+    projectState.addListeners((projects: any[]) => {
+      this.assignedProjects = projects;
+      this.renderProjects()
+    });
+
     this.attach();
     this.renderContent();
   }
