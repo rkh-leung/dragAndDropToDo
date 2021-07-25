@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const util_1 = require("./util");
+const projectState_1 = require("./projectState");
 class ProjectInput {
     constructor() {
         this.templateElement = document.getElementById("project-input");
@@ -59,7 +60,7 @@ class ProjectInput {
         const userInput = this.gatherUserInput();
         if (Array.isArray(userInput)) {
             const [title, desc, people] = userInput;
-            console.log(title, desc, people);
+            projectState_1.projectState.addProject(title, desc, people);
             this.clearInputs();
         }
     }
