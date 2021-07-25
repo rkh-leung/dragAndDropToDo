@@ -32,13 +32,34 @@ function validate(validatableInput) {
 }
 function autobind(_1, _2, descriptor) {
     const originalMethod = descriptor.value;
-    const adjdescriptor = {
+    const adjDescriptor = {
         configurable: true,
         get() {
             return originalMethod.bind(this);
         },
     };
-    return adjdescriptor;
+    return adjDescriptor;
+}
+class ProjectList {
+    constructor(type) {
+        this.type = type;
+        this.templateElement = document.getElementById("project-list");
+        this.hostElement = document.getElementById("app");
+        const importNode = document.importNode(this.templateElement.content, true);
+        this.element = importNode.firstElementChild;
+        this.element.id = `${this.type}-projects`;
+        this.attach();
+        this.renderContent();
+    }
+    renderContent() {
+        const listId = `${this.type}-projects-list`;
+        this.element.querySelector("ul").id = listId;
+        this.element.querySelector("h2").textContent =
+            this.type.toUpperCase() + " PROJECTS";
+    }
+    attach() {
+        this.hostElement.insertAdjacentElement("beforeend", this.element);
+    }
 }
 class ProjectInput {
     constructor() {
@@ -107,4 +128,6 @@ __decorate([
     autobind
 ], ProjectInput.prototype, "submitHandler", null);
 const appInput = new ProjectInput();
+const activeProjectList = new ProjectList("active");
+const finishedProjectList = new ProjectList("finished");
 //# sourceMappingURL=app.js.map

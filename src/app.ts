@@ -46,13 +46,45 @@ function validate(validatableInput: Validatable) {
 //autobind
 function autobind(_1: any, _2: string, descriptor: PropertyDescriptor) {
   const originalMethod = descriptor.value;
-  const adjdescriptor: PropertyDescriptor = {
+  const adjDescriptor: PropertyDescriptor = {
     configurable: true,
     get(): any {
-      return originalMethod.bind(this);
+      const boundFn = originalMethod.bind(this);
+      return boundFn
     },
   };
-  return adjdescriptor;
+  return adjDescriptor;
+}
+
+//project list class
+class ProjectList {
+  templateElement: HTMLTemplateElement;
+  hostElement: HTMLDivElement;
+  element: HTMLElement;
+
+  constructor(private type: "active" | "finished") {
+    this.templateElement = document.getElementById(
+      "project-list"
+    )! as HTMLTemplateElement;
+    this.hostElement = document.getElementById("app")! as HTMLDivElement;
+
+    const importNode = document.importNode(this.templateElement.content, true);
+    this.element = importNode.firstElementChild as HTMLElement;
+    this.element.id = `${this.type}-projects`;
+    this.attach();
+    this.renderContent();
+  }
+
+  private renderContent() {
+    const listId = `${this.type}-projects-list`;
+    this.element.querySelector("ul")!.id = listId;
+    this.element.querySelector("h2")!.textContent =
+      this.type.toUpperCase() + " PROJECTS";
+  }
+
+  private attach() {
+    this.hostElement.insertAdjacentElement("beforeend", this.element);
+  }
 }
 
 // project input class
@@ -148,3 +180,5 @@ class ProjectInput {
 }
 
 const appInput = new ProjectInput();
+const activeProjectList = new ProjectList("active");
+const finishedProjectList = new ProjectList("finished");
