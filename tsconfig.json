@@ -7,7 +7,7 @@
       "dom",
       "es6",
       "dom.iterable",
-      "scripthost"
+      "scripthost"                            // APIs for the Windows Script Hosting System
     ],                             /* Specify library files to be included in the compilation. */
     // "allowJs": true,                       /* Allow javascript files to be compiled. */
     // "checkJs": true,                       /* Report errors in .js files. */
