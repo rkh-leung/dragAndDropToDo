@@ -1,11 +1,4 @@
-interface Validatable {
-  value: string | number
-  required?: boolean
-  minLength?: number
-  maxLength?: number
-  min?: number
-  max?: number
-}
+import { Validatable } from './util'
 
 function validate(validatableInput: Validatable) {
   let isValid = true
