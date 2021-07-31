@@ -138,6 +138,7 @@ class ProjectList {
     const listEl = document.getElementById(
       `${this.type}-projects-list`
     )! as HTMLUListElement
+    listEl.innerHTML = '' // lazy implementation of preventing duplication when adding projects
     for (const projectItem of this.assignedProjects) {
       const listItem = document.createElement('li')
       listItem.textContent = projectItem.title
