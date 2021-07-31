@@ -68,23 +68,28 @@ function autobind(_1: any, _2: string, descriptor: PropertyDescriptor) {
   return adjDescriptor
 }
 
-type Listener = (items: Project[]) => void
+type Listener<T> = (items: T[]) => void
 
-class ProjectState {
-  private listeners: Listener[] = []
+abstract class BaseState<T> {
+  protected listeners: Listener<T>[] = []
+
+  addListeners(listenerFn: Listener<T>) {
+    this.listeners.push(listenerFn)
+  }
+}
+
+class ProjectState extends BaseState<Project>{
   private projects: Project[] = []
   private static instance: ProjectState
 
-  private constructor() {}
+  private constructor() {
+    super()
+  }
 
   static getInstance() {
     if (this.instance) return this.instance
     this.instance = new ProjectState()
     return this.instance
-  }
-
-  addListeners(listenerFn: Listener) {
-    this.listeners.push(listenerFn)
   }
 
   addProject(title: string, description: string, numOfPeople: number) {
