@@ -85,8 +85,6 @@ class ProjectState {
   }
 }
 
-const projectState = ProjectState.getInstance()
-
 class ProjectList {
   templateElement: HTMLTemplateElement
   hostElement: HTMLDivElement
@@ -134,6 +132,8 @@ class ProjectList {
     this.hostElement.insertAdjacentElement('beforeend', this.element)
   }
 }
+
+const projectState = ProjectState.getInstance()
 
 class ProjectInput {
   templateElement: HTMLTemplateElement // accessible after enabling dom under lib in tsconfig
