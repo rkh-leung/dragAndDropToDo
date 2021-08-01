@@ -1,7 +1,6 @@
 import { BaseClass } from './base-component.js'
-import { DragTarget } from '../models/interfaces.js'
+import { DragTarget, Project, ProjectStatus } from '../models/interfaces.js'
 import { autobind } from '../decorators/autobind.js'
-import { ProjectStatus, Project } from '../models/interfaces.js'
 import { projectState } from './project-state.js'
 import { ProjectItem } from './project-item.js'
 
@@ -55,7 +54,6 @@ export class ProjectList
         }
         return project.status === ProjectStatus.Finished
       })
-
       this.renderProjects()
     })
   }
