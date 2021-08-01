@@ -1,3 +1,13 @@
+// Validation
+export interface Validatable {
+  value: string | number
+  required?: boolean
+  minLength?: number
+  maxLength?: number
+  min?: number
+  max?: number
+}
+
 export function validate(validatableInput: Validatable) {
   let isValid = true
   if (validatableInput.required) {
@@ -29,15 +39,5 @@ export function validate(validatableInput: Validatable) {
   ) {
     isValid = isValid && validatableInput.value <= validatableInput.max
   }
-
   return isValid
-}
-
-export interface Validatable {
-  value: string | number
-  required?: boolean
-  minLength?: number
-  maxLength?: number
-  min?: number
-  max?: number
 }

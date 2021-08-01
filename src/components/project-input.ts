@@ -1,16 +1,16 @@
-import { BaseClass } from './base-component.js'
+import { Component } from './base-component.js'
 import { Validatable, validate } from '../utils/validation.js'
 import { autobind } from '../decorators/autobind.js'
 import { projectState } from './project-state.js'
 
-export class ProjectInput extends BaseClass<HTMLDivElement, HTMLFormElement> {
+// ProjectInput Class
+export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
   titleInputElement: HTMLInputElement
   descriptionInputElement: HTMLInputElement
   peopleInputElement: HTMLInputElement
 
   constructor() {
     super('project-input', 'app', true, 'user-input')
-
     this.titleInputElement = this.element.querySelector(
       '#title'
     ) as HTMLInputElement
@@ -20,7 +20,6 @@ export class ProjectInput extends BaseClass<HTMLDivElement, HTMLFormElement> {
     this.peopleInputElement = this.element.querySelector(
       '#people'
     ) as HTMLInputElement
-
     this.configure()
   }
 
@@ -48,7 +47,7 @@ export class ProjectInput extends BaseClass<HTMLDivElement, HTMLFormElement> {
       value: +enteredPeople,
       required: true,
       min: 1,
-      max: 10,
+      max: 5,
     }
 
     if (
@@ -56,7 +55,7 @@ export class ProjectInput extends BaseClass<HTMLDivElement, HTMLFormElement> {
       !validate(descriptionValidatable) ||
       !validate(peopleValidatable)
     ) {
-      alert('Invalid input, please try again')
+      alert('Invalid input, please try again!')
       return
     } else {
       return [enteredTitle, enteredDescription, +enteredPeople]

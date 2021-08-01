@@ -1,3 +1,4 @@
+// Drag & Drop Interfaces
 export interface Draggable {
   dragStartHandler(event: DragEvent): void
 
@@ -12,6 +13,7 @@ export interface DragTarget {
   dragLeaveHandler(event: DragEvent): void
 }
 
+// Project Type
 export enum ProjectStatus {
   Active,
   Finished,
