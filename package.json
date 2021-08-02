@@ -6,11 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --open",
-    "build": "webpack"
+    "build": "webpack --config webpack.config.prod.js"
   },
   "author": "Raymond Leung",
   "license": "MIT",
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
     "lite-server": "^2.6.1",
     "ts-loader": "^9.2.4",
     "typescript": "^4.3.5",
